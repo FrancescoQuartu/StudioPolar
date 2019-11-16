@@ -1,0 +1,13 @@
+istogrammi con differenze di tempi tra successivi 
+per ogni giorno fai un fit esponenziale e prendi lo slope, quello è la frequenza, oppure puoi calcolarlo anche come numero eventi / tempo, o media delle frequenze
+oppure puoi fare l'inverso del delta time medio (ho già verificato che è simile)
+ho provato a calcolare il numero di eventi / tempo ed esce leggermente diverso:
+nel caso calcolo tutti e 3 con errore e li comparo.
+
+poi bisogna fare il plot in funzione della longitudine, e 
+
+dovrò correggere il rate per l'indice barometrico, che si può trovare su
+https://eee.centrofermi.it/research/documents-and-procedures
+
+parallelamente cerca in letteratura la dipendenza aspettata tra
+
