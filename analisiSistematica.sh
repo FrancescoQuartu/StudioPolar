@@ -7,10 +7,10 @@
 #il quale è creato proprio all'inizio di questo programma
 
 #per esempio lancia con:
-#./AnalisiSingoloFile /mnt/c/Users/casa/Desktop/Tesi/StudioPolar/POLA-01/*/*.root
+#./analisiSistematica.sh /mnt/c/Users/casa/Desktop/Tesi/StudioPolar/POLA-01/*/*.root
 
 #creo il file Rate.txt
-echo "Rate1	Rate2	 Latitudine" > Rate.txt
+echo "Rate1	Rate2	Latitudine	ChiQuadro	Pressione	NumSatelliti	Giorno	Mese	Anno" > Rate.txt
 
 echo "Numero di file da analizzare: $#"
 
