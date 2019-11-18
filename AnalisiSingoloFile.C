@@ -1,5 +1,8 @@
 // primo programma studio Polar
 
+// da compilare e poi lanciare con 
+// ./AnalisiSingoloFile.exe percorsofileinput nomefileoutput
+
 // il programma analizza un file root, il cui indirizzo e nome
 // è fornito in input al programma
 // fitta il grafico dei deltaT con un esponenziale e ne ricava chi quadro e rate
@@ -22,18 +25,22 @@ using namespace std;
 //argv[2] : nome file output (ad esempio Rate.txt) //da aggiungere ancora questa opzionalità
 int main(int argc, char *argv[])
 {
-	if(argc != 2)
+	if(argc < 2)
 	{ 
-		cout << "Non hai inserito il nome del file!" << endl;
+		cout << "Non hai inserito il nome del file input!" << endl;
 		return 1;
 	}
-	
+	else if(argc == 2)
+	{
+		cout << "Non hai inserito il nome del file output!" << endl;
+		return 1;
+	}
 	/////////////apro i files/////////////////
 	Char_t *mNomeFile = argv[1]; //bisogna dare sia indirizzo che nome del file
 	//ad esempio:	/mnt/c/Users/casa/Desktop/Tesi/StudioPolar/POLA-01/2019-01-31/POLA-01-2019-01-31-381284802_dst.root
 	cout << "Analisi in corso del file: " << mNomeFile << endl;
 	TFile *mFileIn = new TFile(mNomeFile);
-	const Char_t *mNomeFileOut = "Rate.txt";
+	Char_t *mNomeFileOut = argv[2];
 	ofstream mOut(mNomeFileOut, ios::out | ios::app);
 	if(!mOut.is_open())
 	{

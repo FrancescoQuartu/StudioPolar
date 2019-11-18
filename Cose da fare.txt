@@ -11,3 +11,27 @@ https://eee.centrofermi.it/research/documents-and-procedures
 
 parallelamente cerca in letteratura la dipendenza aspettata tra
 
+/////////////////////////////////////////////////////////////////////
+
+Ora devo fare: lancia il programma già fatto anche per POLA-02 e POLA-03, poichè 
+servirà calcolare il rapporto 2ratePOLA-01 / ( ratePOLA-02 + ratePOLA-03 ) come fatto nel paper
+
+poi devi mediare per ogni singolo giorno i file Rate----.txt
+per fare così chiami la variabile numDay = (anno-2018)*400 + mese * 32 + giorno (i dati iniziano nel 2018)
+while(leggi il file)  //ogni volta una nuova riga
+{
+  leggi giorno,mese,anno
+  inizializza numDay = ...formula...
+  inizializza numFile = 0
+  while(leggi il file)  //ogni volta una nuova riga
+  {
+    if(numDay = ancora lo stesso && chiQuadro < 1)
+    {
+      somma rate, latitudine, conta numFiles
+    }
+    else if(numDay ancora lo stesso) continue
+    else (numDay diverso) break
+  }
+  calcolaMedia rate,latitudine
+  e scrivi le medie su un altro file, assieme al giorno mese anno
+}

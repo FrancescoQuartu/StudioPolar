@@ -7,18 +7,21 @@
 #il quale è creato proprio all'inizio di questo programma
 
 #per esempio lancia con:
-#./analisiSistematica.sh /mnt/c/Users/casa/Desktop/Tesi/StudioPolar/POLA-01/*/*.root
+#./analisiSistematica.sh RatePOLA-01.txt /mnt/c/Users/casa/Desktop/Tesi/StudioPolar/POLA-01/*/*.root
 
 #creo il file Rate.txt
-echo "Rate1	Rate2	Latitudine	ChiQuadro	Pressione	NumSatelliti	Giorno	Mese	Anno" > Rate.txt
+echo "#Rate1	Rate2	Latitudine	ChiQuadro	Pressione	NumSatelliti	Giorno	Mese	Anno" > $1
+
 
 echo "Numero di file da analizzare: $#"
 
-#primo argomento: nome cartella
+#primo argomento: nome file output
 #tutti gli altri sono i nomi dei file
 
 for nomeFile in $@
 do
-	./AnalisiSingoloFile.exe $nomeFile
+  if [[ $1 != $nomeFile ]] ; then
+    ./AnalisiSingoloFile.exe $nomeFile $1
+  fi
 done
 
