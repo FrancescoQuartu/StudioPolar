@@ -25,7 +25,7 @@ while(leggi il file)  //ogni volta una nuova riga
   inizializza numFile = 0
   while(leggi il file)  //ogni volta una nuova riga
   {
-    if(numDay = ancora lo stesso && chiQuadro < 1)
+    if(numDay = ancora lo stesso && chiQuadro < 1 && latitudine valori ragionevoli && rate ragionevoli)
     {
       somma rate, latitudine, conta numFiles
     }
