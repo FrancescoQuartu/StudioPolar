@@ -59,28 +59,6 @@ int main(int argc, char *argv[])
 	Double_t mChiSquare = r->Chi2() / r->Ndf();
 	Double_t mRate1 = -r->Value(1);  //rate1: slope del fit
 	
-	Double_t mRate2 = 1/mDeltaT->GetMean();   //rate2: 1/tempomedio
-
-		
-//	////////////////calcolo la latitudine media//////////////////
-//	TTree *mGpsTree = (TTree *)mFileIn->Get("gps");
-//	Int_t nEvents = mGpsTree->GetEntries();
-//	Float_t mSingleLat;
-//	mGpsTree->SetBranchAddress("Latitude",&mSingleLat);
-//	mGpsTree->SetBranchStatus("*",0); //disable all branches per velocizzare
-//	mGpsTree->SetBranchStatus("Latitude",1);
-//	
-//	Double_t sumLatitude = 0;
-//	for(Int_t i = 0; i < nEvents; i++)
-//	{
-//		mGpsTree->GetEntry(i);
-//		sumLatitude += mSingleLat;
-//	}
-//
-//	Double_t mLatitudine = sumLatitude / nEvents;
-//	//////////////////////////////////////////////////////////
-	
-	
 	////////////////calcolo la pressione media//////////////
 	TTree *mWeatherTree = (TTree *)mFileIn->Get("Weather");
 	Int_t nEvents = mWeatherTree->GetEntries();
@@ -102,11 +80,13 @@ int main(int argc, char *argv[])
 	/////dall'header prendo numero medio di satelliti, giorno, mese anno e latitudine media/////////
 	TTree *mHeaderTree = (TTree *)mFileIn->Get("Header");
 	Int_t mDay, mMonth, mYear;
-	Float_t mNSatellites, mLatitudine;
+	Float_t mNSatellites, mLatitudine, mLongitudine, mAltitudine;
 	mHeaderTree->SetBranchAddress("day",&mDay);
 	mHeaderTree->SetBranchAddress("month",&mMonth);
 	mHeaderTree->SetBranchAddress("year",&mYear);
 	mHeaderTree->SetBranchAddress("latitude",&mLatitudine);
+	mHeaderTree->SetBranchAddress("longitude",&mLongitudine);
+	mHeaderTree->SetBranchAddress("altitude",&mAltitudine);
 	mHeaderTree->SetBranchAddress("nSatellites",&mNSatellites);
 	
 	mHeaderTree->GetEntry(0);
@@ -115,7 +95,7 @@ int main(int argc, char *argv[])
 	
 	
 	////////////////scrivo nel file output///////////////////
-	mOut << mRate1 << "\t" << mRate2 << "\t" << mLatitudine << "\t" << mChiSquare << "\t" << mPressure << "\t" << mNSatellites << "\t" << mDay << "\t" << mMonth << "\t" << mYear << endl;
+	mOut << mRate1 << "\t" << "\t" << mLatitudine << "\t" << mLongitudine << "\t" << mAltitudine << "\t" << mChiSquare << "\t" << mPressure << "\t" << mNSatellites << "\t" << mDay << "\t" << mMonth << "\t" << mYear << endl;
 	
 	//chiudo i files
 	mOut.close();

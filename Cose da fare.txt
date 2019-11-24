@@ -35,3 +35,12 @@ while(leggi il file)  //ogni volta una nuova riga
   calcolaMedia rate,latitudine
   e scrivi le medie su un altro file, assieme al giorno mese anno
 }
+
+////////////////////////////
+salvati:
+zona
+latitudine
+longitudine
+altezza 
+pressione
+
