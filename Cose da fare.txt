@@ -44,3 +44,7 @@ longitudine
 altezza 
 pressione
 
+////////////////////////////////
+rate in funzione della pressione per ciascuna tappa
+
+rate in funzione della temperatura outdoor

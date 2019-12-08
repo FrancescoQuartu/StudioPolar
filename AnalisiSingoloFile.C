@@ -58,23 +58,24 @@ int main(int argc, char *argv[])
 	//memorizzo chi quadro e rate
 	Double_t mChiSquare = r->Chi2() / r->Ndf();
 	Double_t mRate1 = -r->Value(1);  //rate1: slope del fit
+	Double_t mErrRate1   = r->ParError(1); //errore rate1
 	
-	////////////////calcolo la pressione media//////////////
+	Double_t mRate2 = 1/mDeltaT->GetMean(); //frequenza media = 1/DeltaTMedio
+	Double_t mStdDevMean = mDeltaT->GetMean() / sqrt(mDeltaT->GetEntries());
+	Double_t mErrRate2 = mRate2 / mDeltaT->GetMean() * mStdDevMean; //
+	
+	////////////////salvo pressione e temperaturaoutdoor//////////////
 	TTree *mWeatherTree = (TTree *)mFileIn->Get("Weather");
 	Int_t nEvents = mWeatherTree->GetEntries();
-	Float_t mSinglePressure;
-	mWeatherTree->SetBranchAddress("Pressure",&mSinglePressure);
+	Float_t mPressure;
+	Float_t mOutdoorTemp;
+	mWeatherTree->SetBranchAddress("Pressure",&mPressure);
+	mWeatherTree->SetBranchAddress("OutdoorTemperature",&mOutdoorTemp);
 	mWeatherTree->SetBranchStatus("*",0);
 	mWeatherTree->SetBranchStatus("Pressure",1);
+	mWeatherTree->SetBranchStatus("OutdoorTemperature",1);
 	
-	Double_t sumPressure = 0;
-	for(Int_t i = 0; i < nEvents; i++)
-	{
-		mWeatherTree->GetEntry(i);
-		sumPressure += mSinglePressure;
-	}
-	
-	Double_t mPressure = sumPressure / nEvents;
+	mWeatherTree->GetEntry(0);
 	//////////////////////////////////////////////////////////////////
 	
 	/////dall'header prendo numero medio di satelliti, giorno, mese anno e latitudine media/////////
@@ -95,7 +96,7 @@ int main(int argc, char *argv[])
 	
 	
 	////////////////scrivo nel file output///////////////////
-	mOut << mRate1 << "\t" << "\t" << mLatitudine << "\t" << mLongitudine << "\t" << mAltitudine << "\t" << mChiSquare << "\t" << mPressure << "\t" << mNSatellites << "\t" << mDay << "\t" << mMonth << "\t" << mYear << endl;
+	mOut << mRate1 << "\t" << mErrRate1 << "\t" << mRate2 << "\t" << mErrRate2 << "\t" << mLatitudine << "\t" << mOutdoorTemp << "\t" << mLongitudine << "\t" << mAltitudine << "\t" << mChiSquare << "\t" << mPressure << "\t" << mNSatellites << "\t" << mDay << "\t" << mMonth << "\t" << mYear << endl;
 	
 	//chiudo i files
 	mOut.close();

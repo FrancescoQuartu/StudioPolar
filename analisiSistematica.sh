@@ -10,7 +10,7 @@
 #./analisiSistematica.sh RatePOLA-01.txt /mnt/c/Users/casa/Desktop/Tesi/StudioPolar/POLA-01/*/*.root
 
 #creo il file Rate.txt
-echo "#Rate	Latitudine	Longitudine	Altitudine	ChiQuadro	Pressione	NumSatelliti	Giorno	Mese	Anno" > $1
+echo "#Rate1	ErrRate1	Rate2	ErrRate2	Latitudine	TempOut	Longitudine	Altitudine	ChiQuadro	Pressione	NumSatelliti	Giorno	Mese	Anno" > $1
 
 
 echo "Numero di file da analizzare: $#"
